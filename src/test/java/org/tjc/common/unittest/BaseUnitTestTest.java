@@ -26,56 +26,58 @@ package org.tjc.common.unittest;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.tjc.common.unittest.UnitTestSupport.getShowOutput;
 import static org.tjc.common.unittest.UnitTestSupport.methodName;
+import static org.tjc.common.unittest.UnitTestSupport.setShowOutput;
 import static org.tjc.common.unittest.UnitTestSupport.writeBanner;
 import org.tjc.common.unittest.perf.StopWatch;
 
-public class BaseUnitTestTest {
+public class BaseUnitTestTest extends BaseUnitTest {
 
-//    @BeforeEach
-//    public void setUp() throws Exception {
-//        setShowOutput(true);
-//    }
-//
-//    @AfterEach
-//    public void tearDown() throws Exception {
-//        setShowOutput(false);
-//    }
+    @BeforeEach
+    public void setUp() throws Exception {
+        push(getShowOutput());
+        setShowOutput(true);
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        setShowOutput(pop());
+    }
+
     @Test
     public void testShowTimedResult() {
         writeBanner(methodName());
-        BaseUnitTest baseUnitTest = new BaseUnitTest();
         StopWatch sw = StopWatch.createStarted();
         sw.stop();
         BigDecimal result = bigDecimalOf(3.14159);
-        baseUnitTest.showTimedResult(sw, result.toString());
+        showTimedResult(sw, result.toString());
     }
 
     @Test
     public void testShowResult() {
         writeBanner(methodName());
-        BaseUnitTest baseUnitTest = new BaseUnitTest();
         BigDecimal result = bigDecimalOf(3.14159);
-        baseUnitTest.showResult(result.toString());
+        showResult(result.toString());
     }
 
     @Test
     public void testShowTimedResults() {
         writeBanner(methodName());
-        BaseUnitTest baseUnitTest = new BaseUnitTest();
         StopWatch sw = StopWatch.createStarted();
         List<String> results = Arrays.asList("0", "1", "2", "3");
         sw.stop();
-        baseUnitTest.showTimedResults(sw, results);
+        showTimedResults(sw, results);
     }
 
     @Test
     public void testShowResults() {
         writeBanner(methodName());
         List<String> results = Arrays.asList("0", "1", "2", "3");
-        BaseUnitTest baseUnitTest = new BaseUnitTest();
-        baseUnitTest.showResults(results);
+        showResults(results);
     }
 
     private BigDecimal bigDecimalOf(double val) {

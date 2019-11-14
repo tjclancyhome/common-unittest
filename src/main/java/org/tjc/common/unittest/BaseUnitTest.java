@@ -21,15 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package org.tjc.common.unittest;
 
+import java.util.ArrayDeque;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.concurrent.TimeUnit;
 import static org.tjc.common.unittest.UnitTestSupport.writeln;
 import org.tjc.common.unittest.perf.StopWatch;
 
-public class BaseUnitTest {
+public abstract class BaseUnitTest {
+    private final Deque<Boolean> smallStack;
+
+    public BaseUnitTest() {
+        smallStack = new ArrayDeque<>();
+    }
+
+    /**
+     *
+     * @param value
+     */
+    public void push(boolean value) {
+        System.out.println(String.format("### pushing: %s", value));
+        smallStack.push(value);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean pop() {
+        boolean value = smallStack.pop();
+        System.out.println(String.format("### popped: %s", value));
+        return value;
+    }
 
     /**
      *
