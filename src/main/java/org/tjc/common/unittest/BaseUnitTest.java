@@ -110,8 +110,10 @@ public abstract class BaseUnitTest {
 
     private static void showElapsedTimes(StopWatch sw) {
         writeln("time elapsed in nanoseconds : {0}", Long.toString(sw.getTime(TimeUnit.NANOSECONDS)));
-        writeln("time elapsed in microseconds: {0}", Long.toString(sw.getTime(TimeUnit.MICROSECONDS)));
-        writeln("time elapsed in milliseconds: {0}", Long.toString(sw.getTime(TimeUnit.MILLISECONDS)));
+        writeln("time elapsed in microseconds: {0}", Long
+                .toString(sw.getTime(TimeUnit.MICROSECONDS)));
+        writeln("time elapsed in milliseconds: {0}", Long
+                .toString(sw.getTime(TimeUnit.MILLISECONDS)));
         writeln("time elapsed: {0}", sw.toString());
     }
 }

@@ -76,9 +76,9 @@ public class StopWatch {
             return timeStopped - timeStarted;
         }
         throw new IllegalStateException(
-            String.format(
-                "Couldn't calculate elapsed time. Current state: time started: %s, time stopped: %s",
-                Long.toString(timeStarted), Long.toString(timeStopped)));
+                String.format(
+                        "Couldn't calculate elapsed time. Current state: time started: %s, time stopped: %s",
+                        Long.toString(timeStarted), Long.toString(timeStopped)));
     }
 
     public boolean isRunning() {
@@ -129,8 +129,9 @@ public class StopWatch {
 
     @Override
     public String toString() {
-        return String.format("started: %tLns, stopped: %tLns, elapsed: %tLns", timeStarted, timeStopped,
-                             elapsedTime());
+        return String.format("started: %tLns, stopped: %tLns, elapsed: %tLns", timeStarted,
+                timeStopped,
+                elapsedTime());
     }
 
     private static long convert(long time, TimeUnit timeUnit) {

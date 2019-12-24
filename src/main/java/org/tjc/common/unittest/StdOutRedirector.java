@@ -25,7 +25,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 /**
- * A singleton class that Captures std out (System.out), replacing it with a PrintStream that contains a
+ * A singleton class that Captures std out (System.out), replacing it with a PrintStream that
+ * contains a
  * ByteArrayOutputStream.
  *
  * @author tjclancy

@@ -253,7 +253,8 @@ public final class UnitTestSupport {
         String border = fill("*", maxLength + 4);
         sb.append(border).append("\n");
         messages.forEach((s) -> {
-            sb.append("* ").append(s).append(fill(" ", maxLength - s.length())).append(" *").append("\n");
+            sb.append("* ").append(s).append(fill(" ", maxLength - s.length())).append(" *").append(
+                    "\n");
         });
         sb.append(border).append("\n");
         return sb.toString();
@@ -366,7 +367,8 @@ public final class UnitTestSupport {
     }
 
     /**
-     * Counts and returns the number of lines in a file. This is inefficient but suitable for most test cases.
+     * Counts and returns the number of lines in a file. This is inefficient but suitable for most
+     * test cases.
      *
      * @param file The file to read.
      *
@@ -521,7 +523,8 @@ public final class UnitTestSupport {
     }
 
     /**
-     * Simple file copy method. Java 7+ introduces the Files utility class that works with Path objects.
+     * Simple file copy method. Java 7+ introduces the Files utility class that works with Path
+     * objects.
      *
      * @param src A string containing a file path.
      * @param dst A string containing a file path.
@@ -530,8 +533,7 @@ public final class UnitTestSupport {
      * @throws IOException
      */
     public static void copy(String src, String dst) throws FileNotFoundException, IOException {
-        try (InputStream in = new FileInputStream(src);
-                OutputStream out = new FileOutputStream(dst)) {
+        try( InputStream in = new FileInputStream(src);  OutputStream out = new FileOutputStream(dst)) {
             byte[] buff = new byte[BUFFER_SIZE];
             int n;
             while ((n = in.read(buff)) >= 0) {
@@ -541,7 +543,8 @@ public final class UnitTestSupport {
     }
 
     /**
-     * Returns the files in a directory. If recursive == true then the director is scanned recursively.
+     * Returns the files in a directory. If recursive == true then the director is scanned
+     * recursively.
      *
      * @param directory
      * @param recursive
@@ -556,13 +559,13 @@ public final class UnitTestSupport {
 
         if (Files.isDirectory(start)) {
             if (!recursive) {
-                try (DirectoryStream<Path> ds = Files.newDirectoryStream(start, FILES_ONLY_FILTER)) {
+                try( DirectoryStream<Path> ds = Files.newDirectoryStream(start, FILES_ONLY_FILTER)) {
                     ds.iterator().forEachRemaining(p -> {
                         fileNames.add(p.toString());
                     });
                 }
             } else {
-                try (Stream<Path> pathStream = Files.walk(start)) {
+                try( Stream<Path> pathStream = Files.walk(start)) {
                     pathStream.forEach(p -> {
                         if (pathIsFile(p)) {
                             fileNames.add(p.toString());
@@ -575,7 +578,8 @@ public final class UnitTestSupport {
     }
 
     /**
-     * Returns Path object for each file in basePath and if recursive returns Path object for basePath and its
+     * Returns Path object for each file in basePath and if recursive returns Path object for
+     * basePath and its
      * subdirectories.
      *
      * @param start
@@ -589,13 +593,13 @@ public final class UnitTestSupport {
         List<Path> files = new ArrayList<>();
         if (Files.isDirectory(start)) {
             if (!recursive) {
-                try (DirectoryStream<Path> ds = Files.newDirectoryStream(start, FILES_ONLY_FILTER)) {
+                try( DirectoryStream<Path> ds = Files.newDirectoryStream(start, FILES_ONLY_FILTER)) {
                     ds.iterator().forEachRemaining(p -> {
                         files.add(p);
                     });
                 }
             } else {
-                try (Stream<Path> pathStream = Files.walk(start)) {
+                try( Stream<Path> pathStream = Files.walk(start)) {
                     pathStream.forEach(p -> {
                         if (pathIsFile(p)) {
                             files.add(p);
@@ -656,7 +660,8 @@ public final class UnitTestSupport {
     /**
      * Returns the name of the caller's method.
      * <p>
-     * Note: This is original method name but I also like the naming convention the does not start with 'get'.
+     * Note: This is original method name but I also like the naming convention the does not start
+     * with 'get'.
      * See the method methodName().
      *
      * @return The name of the calling method.
@@ -695,7 +700,8 @@ public final class UnitTestSupport {
     }
 
     /**
-     * Returns an empty ArrayList of type T. Note: Using this method name is consistent with the listOf(T...
+     * Returns an empty ArrayList of type T. Note: Using this method name is consistent with the
+     * listOf(T...
      * members) but the the emptyList method is explicit.
      *
      * @param <T>
@@ -707,7 +713,8 @@ public final class UnitTestSupport {
     }
 
     /**
-     * Returns an empty ArrayList of type T. Note: Not sure of I like this method naming over the listOf()
+     * Returns an empty ArrayList of type T. Note: Not sure of I like this method naming over the
+     * listOf()
      * that returns an empty ArrayList of type T.
      *
      * @param <T>
