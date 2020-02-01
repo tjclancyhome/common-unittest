@@ -25,8 +25,11 @@ package org.tjc.common.unittest;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.tjc.common.unittest.UnitTestSupport.methodName;
+import static org.tjc.common.unittest.UnitTestSupport.setShowOutput;
 import static org.tjc.common.unittest.UnitTestSupport.writeBanner;
 import static org.tjc.common.unittest.UnitTestSupport.writefln;
 import static org.tjc.common.unittest.UnitTestSupport.writeln;
@@ -37,17 +40,27 @@ import static org.tjc.common.unittest.UnitTestSupport.writeln;
  */
 public class ClassInfoTest extends BaseUnitTest {
 
+    @BeforeEach
+    public void beforeEach() {
+        setShowOutput(true);
+    }
+
+    @AfterEach
+    public void afterEach() {
+        setShowOutput(false);
+    }
+
     @Test
     public void testGetMethods() throws Exception {
         writeBanner(methodName());
         ClassInfo cnf = new ClassInfo("Hello. I'm a String!");
         cnf.getMethods()
-                .forEach(m -> writefln("name: %s, params: %s", m.getName(), m.getParameterCount()));
+            .forEach(m -> writefln("name: %s, params: %s", m.getName(), m.getParameterCount()));
         writeln();
         ClassInfo cnf2 = new ClassInfo(String.class);
 
         cnf2.getMethods()
-                .forEach(m -> writefln("name: %s, params: %s", m.getName(), m.getParameterCount()));
+            .forEach(m -> writefln("name: %s, params: %s", m.getName(), m.getParameterCount()));
         writeln();
 
         List<Method> cnf2Methods = cnf2.getMethods();

@@ -30,37 +30,51 @@ import java.util.concurrent.TimeUnit;
 import static org.tjc.common.unittest.UnitTestSupport.writeln;
 import org.tjc.common.unittest.perf.StopWatch;
 
+/**
+ * <p>
+ * Abstract BaseUnitTest class.</p>
+ *
+ * @author tjclancy
+ * @version $Id: $Id
+ */
 public abstract class BaseUnitTest {
-    private final Deque<Boolean> smallStack;
+    private final Deque<Boolean> smallStack = new ArrayDeque<>();
 
+    /**
+     * <p>
+     * Constructor for BaseUnitTest.</p>
+     */
     public BaseUnitTest() {
-        smallStack = new ArrayDeque<>();
     }
 
     /**
+     * <p>
+     * pushBool.</p>
      *
-     * @param value
+     * @param value a boolean.
      */
-    public void push(boolean value) {
-        System.out.println(String.format("### pushing: %s", value));
+    public void pushBool(boolean value) {
         smallStack.push(value);
     }
 
     /**
+     * <p>
+     * popBool.</p>
      *
-     * @return
+     * @return a boolean.
      */
-    public boolean pop() {
+    public boolean popBool() {
         boolean value = smallStack.pop();
-        System.out.println(String.format("### popped: %s", value));
         return value;
     }
 
     /**
+     * <p>
+     * showTimedResult.</p>
      *
-     * @param <T>
-     * @param sw
-     * @param result
+     * @param sw     a {@link org.tjc.common.unittest.perf.StopWatch} object.
+     * @param result a T object.
+     * @param <T>    a T object.
      */
     public <T> void showTimedResult(StopWatch sw, T result) {
         showElapsedTimes(sw);
@@ -68,9 +82,11 @@ public abstract class BaseUnitTest {
     }
 
     /**
+     * <p>
+     * showResult.</p>
      *
-     * @param <T>
-     * @param result
+     * @param result a T object.
+     * @param <T>    a T object.
      */
     public <T> void showResult(T result) {
         writeln("=======");
@@ -81,10 +97,12 @@ public abstract class BaseUnitTest {
     }
 
     /**
+     * <p>
+     * showTimedResults.</p>
      *
-     * @param <T>
-     * @param sw
-     * @param results
+     * @param sw      a {@link org.tjc.common.unittest.perf.StopWatch} object.
+     * @param results a {@link java.util.Collection} object.
+     * @param <T>     a T object.
      */
     public <T> void showTimedResults(StopWatch sw, Collection<T> results) {
         showElapsedTimes(sw);
@@ -96,9 +114,11 @@ public abstract class BaseUnitTest {
     }
 
     /**
+     * <p>
+     * showResults.</p>
      *
-     * @param <T>
-     * @param results
+     * @param results a {@link java.util.Collection} object.
+     * @param <T>     a T object.
      */
     public <T> void showResults(Collection<T> results) {
         writeln("========");
@@ -111,9 +131,9 @@ public abstract class BaseUnitTest {
     private static void showElapsedTimes(StopWatch sw) {
         writeln("time elapsed in nanoseconds : {0}", Long.toString(sw.getTime(TimeUnit.NANOSECONDS)));
         writeln("time elapsed in microseconds: {0}", Long
-                .toString(sw.getTime(TimeUnit.MICROSECONDS)));
+            .toString(sw.getTime(TimeUnit.MICROSECONDS)));
         writeln("time elapsed in milliseconds: {0}", Long
-                .toString(sw.getTime(TimeUnit.MILLISECONDS)));
+            .toString(sw.getTime(TimeUnit.MILLISECONDS)));
         writeln("time elapsed: {0}", sw.toString());
     }
 }

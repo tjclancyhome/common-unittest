@@ -100,7 +100,7 @@ public class StopWatch {
     /**
      * Converts the internal nanosecond time to milliseconds.
      *
-     * @return
+     * @return Returns the time as a long int.
      */
     public long getTime() {
         return convert(timeStarted, TimeUnit.MILLISECONDS);
@@ -109,9 +109,9 @@ public class StopWatch {
     /**
      * Converts internal nanosecond time to the specfied time unit.
      *
-     * @param timeUnit
+     * @param timeUnit The TimeUnit (e.g. Hours, Minutes, Seconds).
      *
-     * @return
+     * @return Returnd the time as a long int.
      */
     public long getTime(TimeUnit timeUnit) {
         return convert(timeStarted, timeUnit);

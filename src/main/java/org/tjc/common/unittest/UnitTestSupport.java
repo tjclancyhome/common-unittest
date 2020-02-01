@@ -254,7 +254,7 @@ public final class UnitTestSupport {
         sb.append(border).append("\n");
         messages.forEach((s) -> {
             sb.append("* ").append(s).append(fill(" ", maxLength - s.length())).append(" *").append(
-                    "\n");
+                "\n");
         });
         sb.append(border).append("\n");
         return sb.toString();
@@ -383,24 +383,24 @@ public final class UnitTestSupport {
     /**
      * Returns a stream of path object given a directory path.
      *
-     * @param path
+     * @param path The file's Path.
      *
-     * @return
+     * @return Returns a Stream of the listed files in the path.
      *
-     * @throws IOException
+     * @throws IOException If an IO Exception occurs while getting a Stream.
      */
     public static Stream<Path> streamPaths(Path path) throws IOException {
         return Files.list(path);
     }
 
     /**
-     * Returns a stream of string where each string represents a line int the file.
+     * Returns a stream of string where each string represents a line in the file.
      *
-     * @param file
+     * @param file The path of the file to read.
      *
-     * @return
+     * @return Returns a Stream containing the lines of the file.
      *
-     * @throws IOException
+     * @throws IOException If an IO Exception occurs while opening or reading the file.
      */
     public static Stream<String> streamLines(Path file) throws IOException {
         return Files.lines(file, Charset.defaultCharset());
@@ -409,9 +409,9 @@ public final class UnitTestSupport {
     /**
      * Returns a BufferedReader from an InputStream.
      *
-     * @param is
+     * @param is An input stream.
      *
-     * @return
+     * @return Retuns a BufferedReader for reading from the input stream.
      */
     public static BufferedReader bufferedReaderFrom(InputStream is) {
         return new BufferedReader(new InputStreamReader(is));
@@ -430,32 +430,14 @@ public final class UnitTestSupport {
         return new String(Files.readAllBytes(path));
     }
 
-    /**
-     *
-     * @param fileName
-     *
-     * @return
-     */
     public static boolean fileExists(String fileName) {
         return Files.exists(Paths.get(fileName));
     }
 
-    /**
-     *
-     * @param path
-     *
-     * @return
-     */
     public static boolean fileExists(final Path path) {
         return Files.exists(path);
     }
 
-    /**
-     *
-     * @param file
-     *
-     * @return
-     */
     public static boolean fileExists(final File file) {
         return file.exists();
     }
@@ -463,30 +445,18 @@ public final class UnitTestSupport {
     /**
      * Checks that all files in the supplied collection exist.
      *
-     * @param files
+     * @param files A collection of files.
      *
-     * @return
+     * @return True if all the files in the collection exist.
      */
     public static boolean filesExist(final Collection<File> files) {
         return files.stream().allMatch(file -> file.exists());
     }
 
-    /**
-     *
-     * @param files
-     *
-     * @return
-     */
     public static boolean filesExist(final File... files) {
         return asList(files).stream().allMatch(file -> file.exists());
     }
 
-    /**
-     *
-     * @param files
-     *
-     * @return
-     */
     public static boolean filesExist(final Stream<File> files) {
         return files.allMatch(file -> file.exists());
     }
@@ -494,30 +464,18 @@ public final class UnitTestSupport {
     /**
      * Checks that all paths in the supplied collection exist.
      *
-     * @param paths
+     * @param paths A collection of Path objects.
      *
-     * @return
+     * @return Returns true of all of the path objects exist.
      */
     public static boolean pathsExist(final Collection<Path> paths) {
         return paths.stream().allMatch(path -> Files.exists(path));
     }
 
-    /**
-     *
-     * @param paths
-     *
-     * @return
-     */
     public static boolean pathsExist(final Path... paths) {
         return asList(paths).stream().allMatch(path -> Files.exists(path));
     }
 
-    /**
-     *
-     * @param paths
-     *
-     * @return
-     */
     public static boolean pathsExist(final Stream<Path> paths) {
         return paths.allMatch(path -> Files.exists(path));
     }
@@ -529,11 +487,11 @@ public final class UnitTestSupport {
      * @param src A string containing a file path.
      * @param dst A string containing a file path.
      *
-     * @throws FileNotFoundException
-     * @throws IOException
+     * @throws FileNotFoundException Throws exception if the source file cannot be found.
+     * @throws IOException           Throws if the input stream or output streaam encounter an IO error.
      */
     public static void copy(String src, String dst) throws FileNotFoundException, IOException {
-        try( InputStream in = new FileInputStream(src);  OutputStream out = new FileOutputStream(dst)) {
+        try(InputStream in = new FileInputStream(src); OutputStream out = new FileOutputStream(dst)) {
             byte[] buff = new byte[BUFFER_SIZE];
             int n;
             while ((n = in.read(buff)) >= 0) {
@@ -546,12 +504,12 @@ public final class UnitTestSupport {
      * Returns the files in a directory. If recursive == true then the director is scanned
      * recursively.
      *
-     * @param directory
-     * @param recursive
+     * @param directory The directory to open.
+     * @param recursive If recursive is true the directory is searched recursively.
      *
-     * @return
+     * @return Returns a collection of strings, each of which contain a file name found in the directory.
      *
-     * @throws IOException
+     * @throws IOException Throws if directory cannot be open or if there is an error reading file names.
      */
     public static List<String> fileNamesIn(String directory, boolean recursive) throws IOException {
         List<String> fileNames = new ArrayList<>();
@@ -559,13 +517,13 @@ public final class UnitTestSupport {
 
         if (Files.isDirectory(start)) {
             if (!recursive) {
-                try( DirectoryStream<Path> ds = Files.newDirectoryStream(start, FILES_ONLY_FILTER)) {
+                try(DirectoryStream<Path> ds = Files.newDirectoryStream(start, FILES_ONLY_FILTER)) {
                     ds.iterator().forEachRemaining(p -> {
                         fileNames.add(p.toString());
                     });
                 }
             } else {
-                try( Stream<Path> pathStream = Files.walk(start)) {
+                try(Stream<Path> pathStream = Files.walk(start)) {
                     pathStream.forEach(p -> {
                         if (pathIsFile(p)) {
                             fileNames.add(p.toString());
@@ -582,24 +540,25 @@ public final class UnitTestSupport {
      * basePath and its
      * subdirectories.
      *
-     * @param start
-     * @param recursive
+     * @param start     The start path.
+     * @param recursive True if you want to get files recursively, otherwise only the direct children from
+     *                  start path are returned.
      *
-     * @return
+     * @return The lisrt of Paths from the st
      *
-     * @throws IOException
+     * @throws IOException If there was an IO error when attempting access the start path.
      */
     public static List<Path> filesIn(Path start, boolean recursive) throws IOException {
         List<Path> files = new ArrayList<>();
         if (Files.isDirectory(start)) {
             if (!recursive) {
-                try( DirectoryStream<Path> ds = Files.newDirectoryStream(start, FILES_ONLY_FILTER)) {
+                try(DirectoryStream<Path> ds = Files.newDirectoryStream(start, FILES_ONLY_FILTER)) {
                     ds.iterator().forEachRemaining(p -> {
                         files.add(p);
                     });
                 }
             } else {
-                try( Stream<Path> pathStream = Files.walk(start)) {
+                try(Stream<Path> pathStream = Files.walk(start)) {
                     pathStream.forEach(p -> {
                         if (pathIsFile(p)) {
                             files.add(p);
@@ -611,14 +570,6 @@ public final class UnitTestSupport {
         return files;
     }
 
-    /**
-     *
-     * @param start
-     *
-     * @return
-     *
-     * @throws IOException
-     */
     public static List<Path> filesInFileTree(Path start) throws IOException {
         List<Path> files = new ArrayList<>();
         Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
@@ -634,25 +585,10 @@ public final class UnitTestSupport {
         return files;
     }
 
-    /**
-     *
-     * @param path
-     * @param visitor
-     *
-     * @return
-     *
-     * @throws IOException
-     */
     public static Path visitFiles(Path path, FileVisitor<Path> visitor) throws IOException {
         return Files.walkFileTree(path, visitor);
     }
 
-    /**
-     *
-     * @param p
-     *
-     * @return
-     */
     public static boolean pathIsFile(Path p) {
         return Files.isRegularFile(p, LinkOption.NOFOLLOW_LINKS);
     }
@@ -699,36 +635,14 @@ public final class UnitTestSupport {
         return new ArrayList<>(asList(members));
     }
 
-    /**
-     * Returns an empty ArrayList of type T. Note: Using this method name is consistent with the
-     * listOf(T...
-     * members) but the the emptyList method is explicit.
-     *
-     * @param <T>
-     *
-     * @return
-     */
     public static <T> List<T> listOf() {
         return new ArrayList<>();
     }
 
-    /**
-     * Returns an empty ArrayList of type T. Note: Not sure of I like this method naming over the
-     * listOf()
-     * that returns an empty ArrayList of type T.
-     *
-     * @param <T>
-     *
-     * @return
-     */
     public static <T> List<T> emptyList() {
         return new ArrayList<>();
     }
 
-    /**
-     *
-     * @param ps
-     */
     public static void listSystemProperties(PrintStream ps) {
         System.getProperties().list(ps);
     }

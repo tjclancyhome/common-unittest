@@ -39,13 +39,13 @@ public class BaseUnitTestTest extends BaseUnitTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        push(getShowOutput());
+        pushBool(getShowOutput());
         setShowOutput(true);
     }
 
     @AfterEach
     public void tearDown() throws Exception {
-        setShowOutput(pop());
+        setShowOutput(popBool());
     }
 
     @Test

@@ -25,8 +25,21 @@ package org.tjc.common.unittest;
 
 import java.util.Arrays;
 
+/**
+ * <p>Strings class.</p>
+ *
+ * @author tjclancy
+ * @version $Id: $Id
+ */
 public class Strings {
 
+    /**
+     * <p>fill.</p>
+     *
+     * @param c a char.
+     * @param length a int.
+     * @return a {@link java.lang.String} object.
+     */
     public static String fill(char c, int length) {
         char[] chars = new char[length];
         Arrays.fill(chars, c);

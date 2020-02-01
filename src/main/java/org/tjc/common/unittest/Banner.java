@@ -81,15 +81,16 @@ public class Banner {
      * I'm not sure that I like these static factory methods, but the can be useful. TODO: Figure
      * out whether to keep or kill.
      */
+
     /**
      *
-     * @param borderChar
-     * @param titleMessageSeparatorChar
-     * @param title
-     * @param numEndingBlankLines
-     * @param messages
+     * @param borderChar                The character that is used to define the border.
+     * @param titleMessageSeparatorChar Message separator char.
+     * @param title                     The title.
+     * @param numEndingBlankLines       The number of ending blank lines.
+     * @param messages                  A list of messages to display.
      *
-     * @return
+     * @return a new Banner object.
      */
     public static Banner newInstance(Character borderChar, Character titleMessageSeparatorChar,
             String title,
@@ -100,13 +101,13 @@ public class Banner {
 
     /**
      *
-     * @param borderChar
-     * @param titleMessageSeparatorChar
-     * @param title
-     * @param numEndingBlankLines
-     * @param message
+     * @param borderChar                The character that is used to define the border.
+     * @param titleMessageSeparatorChar Message separator char.
+     * @param title                     The title.
+     * @param numEndingBlankLines       The number of ending blank lines.
+     * @param message                   A single message to display.
      *
-     * @return
+     * @return a new Banner object.
      */
     public static Banner newInstance(Character borderChar, Character titleMessageSeparatorChar,
             String title,
@@ -118,11 +119,11 @@ public class Banner {
 
     /**
      *
-     * @param title
-     * @param numEndingBlankLines
-     * @param message
+     * @param title               The title.
+     * @param numEndingBlankLines The number of ending blank lines.
+     * @param message             A single message to display.
      *
-     * @return
+     * @return a new Banner object.
      */
     public static Banner newInstance(String title, int numEndingBlankLines, String message) {
         List<String> messages = new ArrayList<>(Arrays.asList(message));
@@ -132,9 +133,9 @@ public class Banner {
 
     /**
      *
-     * @param title
+     * @param title The title.
      *
-     * @return
+     * @return a new Banner object.
      */
     public static Banner newInstance(String title) {
         List<String> messages = new ArrayList<>();
@@ -144,7 +145,7 @@ public class Banner {
 
     /**
      *
-     * @return
+     * @return Returns the string that when displayed shows the full banner.
      */
     public String generateBanner() {
         StringBuilder sb = new StringBuilder();
