@@ -488,7 +488,8 @@ public final class UnitTestSupport {
      * @param dst A string containing a file path.
      *
      * @throws FileNotFoundException Throws exception if the source file cannot be found.
-     * @throws IOException           Throws if the input stream or output streaam encounter an IO error.
+     * @throws IOException           Throws if the input stream or output streaam encounter an IO
+     *                               error.
      */
     public static void copy(String src, String dst) throws FileNotFoundException, IOException {
         try(InputStream in = new FileInputStream(src); OutputStream out = new FileOutputStream(dst)) {
@@ -507,9 +508,11 @@ public final class UnitTestSupport {
      * @param directory The directory to open.
      * @param recursive If recursive is true the directory is searched recursively.
      *
-     * @return Returns a collection of strings, each of which contain a file name found in the directory.
+     * @return Returns a collection of strings, each of which contain a file name found in the
+     *         directory.
      *
-     * @throws IOException Throws if directory cannot be open or if there is an error reading file names.
+     * @throws IOException Throws if directory cannot be open or if there is an error reading file
+     *                     names.
      */
     public static List<String> fileNamesIn(String directory, boolean recursive) throws IOException {
         List<String> fileNames = new ArrayList<>();
@@ -541,7 +544,8 @@ public final class UnitTestSupport {
      * subdirectories.
      *
      * @param start     The start path.
-     * @param recursive True if you want to get files recursively, otherwise only the direct children from
+     * @param recursive True if you want to get files recursively, otherwise only the direct
+     *                  children from
      *                  start path are returned.
      *
      * @return The lisrt of Paths from the st
