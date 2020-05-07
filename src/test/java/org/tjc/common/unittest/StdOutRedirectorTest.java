@@ -27,6 +27,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.tjc.common.unittest.UnitTestSupport.methodName;
+import static org.tjc.common.unittest.UnitTestSupport.setShowOutput;
 import static org.tjc.common.unittest.UnitTestSupport.writeBanner;
 import static org.tjc.common.unittest.UnitTestSupport.writefln;
 import static org.tjc.common.unittest.UnitTestSupport.writeln;
@@ -38,16 +39,17 @@ public class StdOutRedirectorTest {
     @BeforeEach
     public void setUp() throws Exception {
         writeln("setUp(): start capturing...");
+        setShowOutput(true);
         capture.startCapture();
 
     }
 
     @AfterEach
     public void tearDown() throws Exception {
-//        setShowOutput(false);
         capture.stopCapture();
         writeln("tearDown(): stopped capturing.");
         writefln("tearDown(): captured text:%n(%s)", capture.toString());
+        setShowOutput(false);
     }
 
     @Test
@@ -74,7 +76,7 @@ public class StdOutRedirectorTest {
          * Print a string to capturedSysOut.
          */
         capture.getCapturedStdOut().println(
-                "This should print directly to console bypassing the capture.");
+            "This should print directly to console bypassing the capture.");
         writeln("***** testRuleBasedStdOutRedirector() *****");
         writeln("##### entered testRuleBasedStdOutRedirector()");
         writeln("Abc-123");

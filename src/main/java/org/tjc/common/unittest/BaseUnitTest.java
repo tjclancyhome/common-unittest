@@ -27,8 +27,9 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.concurrent.TimeUnit;
-import static org.tjc.common.unittest.UnitTestSupport.writeln;
 import org.tjc.common.unittest.perf.StopWatch;
+
+import static org.tjc.common.unittest.UnitTestSupport.writeln;
 
 /**
  * <p>
@@ -38,7 +39,7 @@ import org.tjc.common.unittest.perf.StopWatch;
  * @version $Id: $Id
  */
 public abstract class BaseUnitTest {
-    private final Deque<Boolean> smallStack = new ArrayDeque<>();
+    private final Deque<Boolean> smallStack = new ArrayDeque<>(1);
 
     /**
      * <p>
@@ -126,6 +127,22 @@ public abstract class BaseUnitTest {
         writeln("========");
         results.forEach(result -> writeln("  {0}", result));
         writeln();
+    }
+
+    public void forceShowOutput() {
+        if (UnitTestSupport.getOverrideForceOutput() == false) {
+            if (!smallStack.isEmpty()) {
+                smallStack.clear();
+            }
+            pushBool(UnitTestSupport.getShowOutput());
+            UnitTestSupport.setShowOutput(true);
+        }
+    }
+
+    public void restoreShowOutput() {
+        if (smallStack.isEmpty() == false) {
+            UnitTestSupport.setShowOutput(popBool());
+        }
     }
 
     private static void showElapsedTimes(StopWatch sw) {

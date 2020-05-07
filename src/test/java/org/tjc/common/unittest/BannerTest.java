@@ -24,9 +24,12 @@
 package org.tjc.common.unittest;
 
 import java.util.ArrayList;
+import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.tjc.common.unittest.UnitTestSupport.methodName;
+import static org.tjc.common.unittest.UnitTestSupport.setShowOutput;
 import static org.tjc.common.unittest.UnitTestSupport.writeBanner;
 import static org.tjc.common.unittest.UnitTestSupport.writeln;
 
@@ -38,24 +41,25 @@ import static org.tjc.common.unittest.UnitTestSupport.writeln;
  */
 public class BannerTest {
 
-//    @BeforeEach
-//    public void setUp() throws Exception {
-//        setShowOutput(true);
-//    }
-//
-//    @AfterEach
-//    public void tearDown() throws Exception {
-//        setShowOutput(false);
-//    }
+    @BeforeEach
+    public void setUp() throws Exception {
+        setShowOutput(true);
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        setShowOutput(false);
+    }
+
     @Test
     public void smokeTest() {
         writeBanner(methodName());
         var expected = ""
-                + "***************************\n"
-                + "* Title                   *\n"
-                + "* ======================= *\n"
-                + "* This is a long message. *\n"
-                + "***************************";
+            + "***************************\n"
+            + "* Title                   *\n"
+            + "* ======================= *\n"
+            + "* This is a long message. *\n"
+            + "***************************";
         var banner = Banner.newInstance('*', '=', "Title", 0, "This is a long message.");
         writeln(banner.generateBanner());
         assertEquals(expected, banner.generateBanner());
@@ -69,11 +73,11 @@ public class BannerTest {
         messages.add("This is another long message.");
 
         var expected = ""
-                + "*********************************\n"
-                + "* Title                         *\n"
-                + "* ============================= *\n"
-                + "* This is another long message. *\n"
-                + "*********************************";
+            + "*********************************\n"
+            + "* Title                         *\n"
+            + "* ============================= *\n"
+            + "* This is another long message. *\n"
+            + "*********************************";
         var banner = Banner.newInstance('*', '=', "Title", 0, messages);
         writeln(banner.generateBanner());
         assertEquals(expected, banner.generateBanner());
@@ -84,9 +88,9 @@ public class BannerTest {
         writeBanner(methodName());
 
         var expected = ""
-                + "*********\n"
-                + "* Title *\n"
-                + "*********";
+            + "*********\n"
+            + "* Title *\n"
+            + "*********";
         var banner = Banner.newInstance("Title");
         writeln(banner.generateBanner());
         assertEquals(expected, banner.generateBanner());
@@ -97,13 +101,13 @@ public class BannerTest {
         writeBanner(methodName());
 
         var expected = ""
-                + "*********\n"
-                + "* Title *\n"
-                + "* ===== *\n"
-                + "* m1    *\n"
-                + "* m2    *\n"
-                + "* m3    *\n"
-                + "*********";
+            + "*********\n"
+            + "* Title *\n"
+            + "* ===== *\n"
+            + "* m1    *\n"
+            + "* m2    *\n"
+            + "* m3    *\n"
+            + "*********";
         var messages = new ArrayList<String>();
         messages.add("m1");
         messages.add("m2");

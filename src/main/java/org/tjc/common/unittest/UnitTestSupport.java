@@ -46,10 +46,11 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import static java.util.Arrays.asList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
+
+import static java.util.Arrays.asList;
 
 /**
  *
@@ -57,7 +58,16 @@ import java.util.stream.Stream;
  */
 public final class UnitTestSupport {
 
-    public static final String SHOW_OUTPUT_SYS_PROPERTY = "unitTestSupport.showOutput";
+    /*
+     * Set to true to allow UnitTestSupport to output to console..
+     */
+    public static final String SHOW_OUTPUT_SYS_PROPERTY = "unit.test.support.output.show";
+
+    /*
+     * Override the output of text for tests that attempt to force output to console.
+     */
+    public static final String OVERRIDE_FORCE_OUTPUT_SYS_PROPERTY = "unit.test.support.override.force.output";
+
     protected static final DirectoryStream.Filter<Path> FILES_ONLY_FILTER = filesOnlyFilter();
     private static final int BUFFER_SIZE = 2048;
 
@@ -334,7 +344,13 @@ public final class UnitTestSupport {
     }
 
     public static boolean getShowOutput() {
-        return Boolean.getBoolean(SHOW_OUTPUT_SYS_PROPERTY);
+        boolean showOutput = Boolean.getBoolean(SHOW_OUTPUT_SYS_PROPERTY);
+        return showOutput;
+    }
+
+    public static boolean getOverrideForceOutput() {
+        boolean overrideForceOutput = Boolean.getBoolean(OVERRIDE_FORCE_OUTPUT_SYS_PROPERTY);
+        return overrideForceOutput;
     }
 
     public static boolean systemPropertiesContainsKey(String name) {
@@ -609,7 +625,7 @@ public final class UnitTestSupport {
     public static String getMethodName() {
         final StackTraceElement[] stes = Thread.currentThread().getStackTrace();
         StackTraceElement ste = stes[2];
-        return ste.getMethodName();
+        return String.format("%s()", ste.getMethodName());
     }
 
     /**
@@ -620,7 +636,7 @@ public final class UnitTestSupport {
     public static String methodName() {
         final StackTraceElement[] stes = Thread.currentThread().getStackTrace();
         StackTraceElement ste = stes[2];
-        return ste.getMethodName();
+        return String.format("%s()", ste.getMethodName());
     }
 
     /**
@@ -631,7 +647,7 @@ public final class UnitTestSupport {
     public static String thisMethodName() {
         final StackTraceElement[] stes = Thread.currentThread().getStackTrace();
         StackTraceElement ste = stes[2];
-        return ste.getMethodName();
+        return String.format("%s()", ste.getMethodName());
     }
 
     @SafeVarargs

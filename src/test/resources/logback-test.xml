@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration scan="true" debug="false">
+<configuration scan="true" debug="true">
     <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
-
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
@@ -10,11 +9,12 @@
         </layout>
     </appender>
 
+    <!--
     <logger name="org.tjc.common.unittest" level="debug" additivity="false">
         <appender-ref ref="CONSOLE"/>
     </logger>
-
-    <root level="error">
+    -->
+    <root level="debug">
         <appender-ref ref="CONSOLE"/>
     </root>
 

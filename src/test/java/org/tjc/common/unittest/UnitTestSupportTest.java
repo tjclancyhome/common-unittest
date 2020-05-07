@@ -31,7 +31,7 @@ public class UnitTestSupportTest {
     @Test
     public void smokeTest() {
         String thisMethodName = UnitTestSupport.methodName();
-        boolean test = thisMethodName.equals("smokeTest");
+        boolean test = thisMethodName.equals("smokeTest()");
         assertTrue(test);
     }
 }
