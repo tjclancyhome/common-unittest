@@ -31,20 +31,20 @@ import java.util.List;
  * Class used to create a formatted banner within test case methods. Some examples:
  *
  * <pre>
- * <code>
- * ***********
- * * testFoo *
- * ***********
  *
- * or
+ *    ***********
+ *    * testFoo *
+ *    ***********
  *
- * *************
- * * testFoo   *
- * *-----------*
- * * Message 1 *
- * * Message 2 *
- * *************
- * </code>
+ *    or
+ *
+ *    *************
+ *    * testFoo   *
+ *    *-----------*
+ *    * Message 1 *
+ *    * Message 2 *
+ *    *************
+ *
  * </pre>
  *
  * @author tjclancy
@@ -69,7 +69,7 @@ public class Banner {
     private final List<String> messages;
 
     public Banner(Character borderChar, Character titleMessageSeparatorChar, String title,
-            int numEndingBlankLines, List<String> messages) {
+        int numEndingBlankLines, List<String> messages) {
         this.borderChar = borderChar;
         this.titleMessageSeparatorChar = titleMessageSeparatorChar;
         this.title = title;
@@ -81,8 +81,8 @@ public class Banner {
      * I'm not sure that I like these static factory methods, but the can be useful. TODO: Figure
      * out whether to keep or kill.
      */
-
     /**
+     * A factory method for creating Banner instances.
      *
      * @param borderChar                The character that is used to define the border.
      * @param titleMessageSeparatorChar Message separator char.
@@ -93,13 +93,14 @@ public class Banner {
      * @return a new Banner object.
      */
     public static Banner newInstance(Character borderChar, Character titleMessageSeparatorChar,
-            String title,
-            int numEndingBlankLines, List<String> messages) {
+        String title,
+        int numEndingBlankLines, List<String> messages) {
         return new Banner(borderChar, titleMessageSeparatorChar, title, numEndingBlankLines,
-                messages);
+            messages);
     }
 
     /**
+     * A factory method for creating Banner instances.
      *
      * @param borderChar                The character that is used to define the border.
      * @param titleMessageSeparatorChar Message separator char.
@@ -110,14 +111,15 @@ public class Banner {
      * @return a new Banner object.
      */
     public static Banner newInstance(Character borderChar, Character titleMessageSeparatorChar,
-            String title,
-            int numEndingBlankLines, String message) {
+        String title,
+        int numEndingBlankLines, String message) {
         List<String> messages = new ArrayList<>(Arrays.asList(message));
         return new Banner(borderChar, titleMessageSeparatorChar, title, numEndingBlankLines,
-                messages);
+            messages);
     }
 
     /**
+     * A factory method for creating Banner instances.
      *
      * @param title               The title.
      * @param numEndingBlankLines The number of ending blank lines.
@@ -128,10 +130,11 @@ public class Banner {
     public static Banner newInstance(String title, int numEndingBlankLines, String message) {
         List<String> messages = new ArrayList<>(Arrays.asList(message));
         return new Banner(DEFAULT_BORDER_CHAR, DEFAULT_TITLE_MESSAGE_SEPARATOR_CHAR, title,
-                numEndingBlankLines, messages);
+            numEndingBlankLines, messages);
     }
 
     /**
+     * A factory method for creating Banner instances.
      *
      * @param title The title.
      *
@@ -140,10 +143,11 @@ public class Banner {
     public static Banner newInstance(String title) {
         List<String> messages = new ArrayList<>();
         return new Banner(DEFAULT_BORDER_CHAR, DEFAULT_TITLE_MESSAGE_SEPARATOR_CHAR, title, 0,
-                messages);
+            messages);
     }
 
     /**
+     * Generates a banner and returns it at a String.
      *
      * @return Returns the string that when displayed shows the full banner.
      */
@@ -168,7 +172,7 @@ public class Banner {
          */
         if (!messages.isEmpty()) {
             formatTitleMessageSeparatorChar(sb, maxStringLength, titleMessageSeparatorChar,
-                    borderChar);
+                borderChar);
             messages.forEach((s) -> {
                 formatMessage(sb, maxStringLength, s, borderChar);
             });
@@ -186,17 +190,17 @@ public class Banner {
 
     private static void formatMessage(StringBuilder sb, int len, String s, char borderChar) {
         sb.append("* ")
-                .append(s)
-                .append(Strings.fill(' ', len - s.length()))
-                .append(" ")
-                .append(borderChar)
-                .append("\n");
+            .append(s)
+            .append(Strings.fill(' ', len - s.length()))
+            .append(" ")
+            .append(borderChar)
+            .append("\n");
     }
 
     private static void formatTitleMessageSeparatorChar(StringBuilder sb, int len, char sepChar,
-            char borderChar) {
+        char borderChar) {
         sb.append("*").append(" ").append(Strings.fill(sepChar, len)).append(" ").append(borderChar)
-                .append("\n");
+            .append("\n");
     }
 
 }

@@ -32,8 +32,8 @@ import org.tjc.common.unittest.perf.StopWatch;
 import static org.tjc.common.unittest.UnitTestSupport.writeln;
 
 /**
- * <p>
- * Abstract BaseUnitTest class.</p>
+ * Abstract class to be derived by other test classes that supplies some useful methods when working
+ * with unittest.
  *
  * @author tjclancy
  * @version $Id: $Id
@@ -42,15 +42,13 @@ public abstract class BaseUnitTest {
     private final Deque<Boolean> smallStack = new ArrayDeque<>(1);
 
     /**
-     * <p>
-     * Constructor for BaseUnitTest.</p>
+     * Constructor for BaseUnitTest.
      */
     public BaseUnitTest() {
     }
 
     /**
-     * <p>
-     * pushBool.</p>
+     * pushBool.
      *
      * @param value a boolean.
      */
@@ -59,8 +57,7 @@ public abstract class BaseUnitTest {
     }
 
     /**
-     * <p>
-     * popBool.</p>
+     * popBool.
      *
      * @return a boolean.
      */
@@ -70,8 +67,7 @@ public abstract class BaseUnitTest {
     }
 
     /**
-     * <p>
-     * showTimedResult.</p>
+     * showTimedResult.
      *
      * @param sw     a {@link org.tjc.common.unittest.perf.StopWatch} object.
      * @param result a T object.
@@ -83,8 +79,7 @@ public abstract class BaseUnitTest {
     }
 
     /**
-     * <p>
-     * showResult.</p>
+     * showResult.
      *
      * @param result a T object.
      * @param <T>    a T object.
@@ -98,8 +93,7 @@ public abstract class BaseUnitTest {
     }
 
     /**
-     * <p>
-     * showTimedResults.</p>
+     * showTimedResults.
      *
      * @param sw      a {@link org.tjc.common.unittest.perf.StopWatch} object.
      * @param results a {@link java.util.Collection} object.
@@ -115,8 +109,7 @@ public abstract class BaseUnitTest {
     }
 
     /**
-     * <p>
-     * showResults.</p>
+     * showResults.
      *
      * @param results a {@link java.util.Collection} object.
      * @param <T>     a T object.

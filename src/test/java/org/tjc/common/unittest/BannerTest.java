@@ -25,9 +25,10 @@ package org.tjc.common.unittest;
 
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.tjc.common.unittest.UnitTestSupport.methodName;
 import static org.tjc.common.unittest.UnitTestSupport.setShowOutput;
 import static org.tjc.common.unittest.UnitTestSupport.writeBanner;
@@ -35,7 +36,8 @@ import static org.tjc.common.unittest.UnitTestSupport.writeln;
 
 /**
  * I was using the Builder in Lombok 1.18.8 while I was trying to make this utility class modular. I
- * couldn't figure out why I wasn't able to get this working.
+ * couldn't figure out why I wasn't able to get this working, but I think that project lombok was
+ * having trouble in a modularized project.
  *
  * @author tjclancy
  */
