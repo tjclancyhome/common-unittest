@@ -31,23 +31,44 @@ import java.util.concurrent.TimeUnit;
  * @author tjclancy
  */
 public class StopWatch {
-
+    private static final String DEFAULT_ID = "<no_id>";
+    private final String id;
     private long timeStarted;
     private long timeStopped;
     private boolean running;
 
     public StopWatch() {
         this.running = false;
+        this.id = DEFAULT_ID;
+    }
+
+    public StopWatch(String id) {
+        this.running = false;
+        this.id = id;
     }
 
     public static StopWatch create() {
         return new StopWatch();
     }
 
+    public static StopWatch create(String id) {
+        return new StopWatch(id);
+    }
+
     public static StopWatch createStarted() {
         StopWatch sw = new StopWatch();
         sw.start();
         return sw;
+    }
+
+    public static StopWatch createStarted(String id) {
+        StopWatch sw = new StopWatch(id);
+        sw.start();
+        return sw;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void start() {
@@ -76,9 +97,9 @@ public class StopWatch {
             return timeStopped - timeStarted;
         }
         throw new IllegalStateException(
-                String.format(
-                        "Couldn't calculate elapsed time. Current state: time started: %s, time stopped: %s",
-                        Long.toString(timeStarted), Long.toString(timeStopped)));
+            String.format(
+                "Couldn't calculate elapsed time. Current state: time started: %s, time stopped: %s",
+                Long.toString(timeStarted), Long.toString(timeStopped)));
     }
 
     public boolean isRunning() {
@@ -129,9 +150,11 @@ public class StopWatch {
 
     @Override
     public String toString() {
-        return String.format("started: %tLns, stopped: %tLns, elapsed: %tLns", timeStarted,
-                timeStopped,
-                elapsedTime());
+        return String.format("started: id: %s, %tLns, stopped: %tLns, elapsed: %tLns",
+            id,
+            timeStarted,
+            timeStopped,
+            elapsedTime());
     }
 
     private static long convert(long time, TimeUnit timeUnit) {

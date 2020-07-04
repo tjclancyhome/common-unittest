@@ -40,11 +40,22 @@ import static org.tjc.common.unittest.UnitTestSupport.writeln;
  */
 public abstract class BaseUnitTest {
     private final Deque<Boolean> smallStack = new ArrayDeque<>(1);
+    private final StdOutRedirector stdOutRed;
 
     /**
      * Constructor for BaseUnitTest.
      */
     public BaseUnitTest() {
+        stdOutRed = StdOutRedirector.getInstance();
+    }
+
+    public void captureStdOut() {
+        stdOutRed.startCapture();
+    }
+
+    public String releaseStdOut() {
+        stdOutRed.stopCapture();
+        return stdOutRed.toString();
     }
 
     /**
