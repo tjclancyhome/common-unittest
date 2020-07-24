@@ -29,11 +29,13 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.tjc.common.unittest.perf.StopWatch;
+
 import static org.tjc.common.unittest.UnitTestSupport.getShowOutput;
 import static org.tjc.common.unittest.UnitTestSupport.methodName;
 import static org.tjc.common.unittest.UnitTestSupport.setShowOutput;
 import static org.tjc.common.unittest.UnitTestSupport.writeBanner;
-import org.tjc.common.unittest.perf.StopWatch;
+import static org.tjc.common.unittest.UnitTestSupport.writeln;
 
 public class BaseUnitTestTest extends BaseUnitTest {
 
@@ -78,6 +80,31 @@ public class BaseUnitTestTest extends BaseUnitTest {
         writeBanner(methodName());
         List<String> results = Arrays.asList("0", "1", "2", "3");
         showResults(results);
+    }
+
+    @Test
+    public void testStdOutCaptureAndRelease() {
+        writeBanner(methodName());
+        writeln("--------------------------------");
+        writeln("Capturing std out now.");
+        writeln("--------------------------------");
+        this.captureStdOut();
+        writeln("First thing captured is me!");
+        writeln();
+        writeln("This is a test.");
+        writeln();
+        writeln("This is only a test.");
+        writeln();
+        System.out.println("Can SOPs be captured?");
+        writeln();
+        String capturedOutput = this.releaseStdOut();
+        writeln("--------------------------------");
+        writeln("Showing what was captured.");
+        writeln("--------------------------------");
+        writeln("{0}", capturedOutput);
+        writeln("--------------------------------");
+        writeln("Done showing what was captured.");
+        writeln("--------------------------------");
     }
 
     private BigDecimal bigDecimalOf(double val) {

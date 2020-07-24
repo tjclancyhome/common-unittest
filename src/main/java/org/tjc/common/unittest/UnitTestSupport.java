@@ -235,6 +235,18 @@ public final class UnitTestSupport {
         }
     }
 
+    public static void writeUnderlined(String message, Object... args) {
+        if (isShowOutput()) {
+            writeln(message, args);
+        }
+    }
+
+    public static void writeUnderlined(String message, char underlineChar, Object... args) {
+        if (isShowOutput()) {
+            writeln(underline(message, underlineChar), args);
+        }
+    }
+
     public static String underline(String message) {
         return underline(message, '=');
     }
